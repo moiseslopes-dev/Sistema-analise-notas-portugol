@@ -1,0 +1,74 @@
+algoritmo "analise_notas"
+var
+   nome : vetor[1..5] de caractere
+   nota : vetor[1..5] de real
+   maioresnomes : vetor[1..5] de caractere
+   maior, menor, media: real
+   contmaior, contacima: inteiro
+   c: inteiro
+procedimento mostrarelatorio ()
+var
+   i: inteiro
+inicio
+      escreval ("----- RELATORIO FINAL -----")
+      escreval ("Média da turma: ", media:4:1)
+      escreval ("Menor nota: ", menor)
+      
+      escreval ("Aluno(s) com maior nota: ")
+      para i de 1 ate contmaior faca
+           escreval (maioresnomes[i])
+      fimpara
+      escreval ("Quantidade acima da média: ", contacima)
+fimprocedimento
+
+funcao calcularmedia (): real
+var
+   i: inteiro
+   soma : real
+inicio
+      soma <- 0
+      para i de 1 ate 5 faca
+           soma <- soma + nota[i]
+      fimpara
+      retorne soma / 5
+fimfuncao
+
+inicio
+      contmaior <- 0
+      contacima <- 0
+      para c de 1 ate 5 faca
+           escreval ("======================")
+           escreval ("   ANALISE DE NOTAS   ")
+           escreval ("======================")
+           Escreval ("Digite o nome do(a) Aluno(a): ")
+           leia (nome[c])
+           escreval ("Digite a nota do(a) Aluno(a): ")
+           leia (nota[c])
+           limpatela
+           se c = 1 entao
+              maior <- nota[c]
+              menor <- nota[c]
+           senao
+                se nota[c] > maior entao
+                   maior <- nota[c]
+                fimse
+
+                se nota[c] < menor entao
+                   menor <- nota[c]
+                fimse
+           fimse
+      fimpara
+      
+      media <- calcularmedia ()
+      
+      para c de 1 ate 5 faca
+           se nota[c] = maior entao
+              contmaior <- contmaior + 1
+              maioresnomes[contmaior] <- nome[c]
+           fimse
+           se nota[c] > media entao
+              contacima <- contacima + 1
+           fimse
+      fimpara
+      
+      mostrarelatorio ()
